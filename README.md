@@ -1,289 +1,344 @@
 # 💰 Expense Tracker with Smart Insighter
 
-## 1. Overview
-A full-stack expense tracking application that helps users manage daily expenses and gain insights into spending behavior.
+## 📌 Overview
 
-**Key Goals:**
-- Track expenses efficiently  
-- Provide structured financial data  
-- Enable future AI-based insights  
+A full-stack expense tracking application designed to help users manage daily expenses and gain meaningful insights into their spending behavior.
+
+### 🎯 Key Goals
+
+* Track expenses efficiently
+* Organize financial data clearly
+* Enable future AI-driven insights
 
 ---
 
-## 2. Tech Stack
+## 🛠️ Tech Stack
 
 ### Backend
-- Python, FastAPI  
-- SQLAlchemy, Pydantic  
-- Uvicorn  
+
+* Python
+* FastAPI
+* SQLAlchemy
+* Pydantic
+* Uvicorn
 
 ### Frontend
-- React (JS)  
-- CSS  
+
+* React (JavaScript)
+* CSS
 
 ---
 
-## 3. Project Structure
+## 📁 Project Structure
+
+```
 Expense_Tracker_Smart_Insighter/
 │
 ├── Backend/
-│ └── app/
-│ ├── main.py
-│ ├── database.py
-│ │
-│ ├── models/
-│ │ ├── user.py
-│ │ └── expense.py
-│ │
-│ ├── schemas/
-│ │ ├── user_schema.py
-│ │ └── expense_schema.py
-│ │
-│ ├── routes/
-│ │ ├── auth.py
-│ │ └── expense.py
-│ │
-│ ├── services/
-│ │ └── ai_service.py
-│ │
-│ ├── utils/
-│ │ └── auth_utils.py
-│ │
-│ └── init.py
+│   └── app/
+│       ├── main.py
+│       ├── database.py
+│       │
+│       ├── models/
+│       │   ├── user.py
+│       │   └── expense.py
+│       │
+│       ├── schemas/
+│       │   ├── user_schema.py
+│       │   └── expense_schema.py
+│       │
+│       ├── routes/
+│       │   ├── auth.py
+│       │   └── expense.py
+│       │
+│       ├── services/
+│       │   └── ai_service.py
+│       │
+│       ├── utils/
+│       │   └── auth_utils.py
+│       │
+│       └── __init__.py
 │
 ├── frontend/
-│ ├── public/
-│ ├── src/
-│ │ ├── components/
-│ │ │ ├── Navbar.jsx
-│ │ │ └── DashboardNavbar.jsx
-│ │ │
-│ │ ├── pages/
-│ │ │ ├── Login.jsx
-│ │ │ ├── Register.jsx
-│ │ │ └── Dashboard.jsx
-│ │ │
-│ │ ├── services/ # API communication layer
-│ │ │
-│ │ ├── App.js # Main React component
-│ │ ├── index.js # Entry point
-│ │ ├── index.css
-│ │ └── Login.css
-│ │
-│ ├── package.json
-│ └── README.mdgin, Register, Dashboard
-├── services/ # API calls
-├── App.js
-└── index.js
+│   ├── public/
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── Navbar.jsx
+│   │   │   └── DashboardNavbar.jsx
+│   │   │
+│   │   ├── pages/
+│   │   │   ├── Login.jsx
+│   │   │   ├── Register.jsx
+│   │   │   └── Dashboard.jsx
+│   │   │
+│   │   ├── services/
+│   │   │   └── api.js
+│   │   │
+│   │   ├── App.js
+│   │   ├── index.js
+│   │   ├── index.css
+│   │   └── Login.css
+│   │
+│   ├── package.json
+│   └── README.md
+```
 
 ---
 
-## 4. Architecture
+## 🏗️ Architecture
 
-- Modular Monolith  
-- Layered design : Frontend → API → Routes → Services → Database.
-- Frontend (React UI)
+* **Architecture Type:** Modular Monolith
+* **Design Pattern:** Layered Architecture
+
+### Flow
+
+Frontend (React UI)
 ↓
 API Calls (HTTP/JSON)
 ↓
 FastAPI Backend
 ↓
-Service Layer (Business + AI Logic)
+Service Layer (Business Logic + AI)
 ↓
 Database (SQLAlchemy ORM)
 ↓
-Response → Frontend UI Rendering
+Response → Frontend Rendering
 
 ---
 
+## ⚙️ Features & Modules
+
+### 🔐 Authentication
+
+* User Registration
+* User Login
+* Password Hashing
+
+### 💸 Expense Management
+
+* Add expenses
+* View expenses
+* Update expenses
+* Delete expenses
+
+### 📊 Dashboard
+
+* Centralized user interface
+* Displays expense data
+* Prepares ground for analytics
+
+### 🤖 Smart Insighter (In Progress)
+
+* Expense categorization
+* Spending pattern analysis
+* Predictive insights (planned)
 
 ---
 
-## 5. Features & Modules
+## 🖥️ Frontend
 
-### Core Features
-- 🔐 Features
-👤 Authentication
-User Registration
-User Login
-Password hashing
-💸 Expense Management
-Add expenses
-View expenses
-Update/Delete expenses
-📊 Dashboard
-Centralized UI for managing data
-Displays expense information
-🤖 Smart Insighter (In Progress)
-Expense categorization
-Spending pattern analysis
-Predictive insights (future scope)
+### Pages
 
-### Frontend Modules
+* **Login.jsx** → User authentication
+* **Register.jsx** → User registration
+* **Dashboard.jsx** → Main user interface
 
-#### 1. Pages
-- **Login.jsx**
-  - User authentication UI
-- **Register.jsx**
-  - User registration form
-- **Dashboard.jsx**
-  - Main user interface after login
+### Components
+
+* **Navbar.jsx** → General navigation
+* **DashboardNavbar.jsx** → Dashboard navigation (logout, profile, etc.)
+
+### Services
+
+* Handles API communication
+* Centralizes HTTP request logic
 
 ---
 
-#### 2. Components
+## 🔧 Backend
 
-- **Navbar.jsx**
-  - General navigation
-- **DashboardNavbar.jsx**
-  - Dashboard-specific navigation (likely includes logout, profile)
+### Authentication (`routes/auth.py`)
 
----
+* Register user
+* Login user
+* Password hashing via `auth_utils.py`
 
-#### 3. Services Layer
-- Handles API calls to backend
-- Centralized HTTP request logic
+### Expense Module (`routes/expense.py`)
 
----
+* Create, Read, Update, Delete expenses
 
-### Backend Modules
+### Models
 
-#### 1. Auth (`routes/auth.py`)
-- Registration
-- Login
-- Password handling via `auth_utils.py`
+* `User`
+* `Expense`
 
-#### 2. Expense (`routes/expense.py`)
-- Create, read, update, delete expenses
+### Schemas
 
-#### 3. Models
-- `User`
-- `Expense`
+* Input validation
+* Response formatting
 
-#### 4. Schemas
-- Input validation
-- Response formatting
+### AI Service (`services/ai_service.py`)
 
-#### 5. AI Service (`services/ai_service.py`)
-- Placeholder for:
-  - Expense categorization
-  - Spending insights
-  - Predictions
+* Placeholder for:
+
+  * Expense categorization
+  * Insights generation
+  * Predictions
 
 ---
 
-## 6. Code Flow
+## 🔄 Application Flow
 
-### Login Flow
-Frontend (Login.jsx)
-→ API call (/login)
-→ Backend validates credentials
-→ Token/response returned
-→ Stored in frontend (localStorage/session)
-→ Redirect to Dashboard
+### 🔑 Login Flow
 
-#### Expense Flow
+1. User enters credentials (Login.jsx)
+2. API call to `/login`
+3. Backend validates user
+4. Token/response returned
+5. Stored in frontend (localStorage/session)
+6. Redirect to Dashboard
 
-Dashboard.jsx
-→ Add/View Expense
-→ API call to backend
-→ Backend processes request
-→ Data stored/retrieved from DB
-→ Response sent to UI
-### Dashboard Rendering
+### 💰 Expense Flow
 
-Dashboard.jsx
-→ Fetch user expenses
-→ Display list / analytics
-→ (Future) AI insights shown
+1. User adds/views expense (Dashboard.jsx)
+2. API request sent
+3. Backend processes request
+4. Data stored/retrieved from database
+5. Response returned to UI
+
+### 📊 Dashboard Rendering
+
+1. Fetch user expenses
+2. Display data
+3. Future: show AI insights
 
 ---
 
-## 7. API & Data Layer
+## 🌐 API Endpoints
 
-### API Type
-- REST
+### Authentication
 
-### Key Endpoints
-
-#### Authentication
-POST /register
-POST /login
-
+* `POST /register`
+* `POST /login`
 
 ### Expenses
 
-POST /expense
-GET /expenses
-PUT /expense/{id}
-DELETE /expense/{id}
+* `POST /expense`
+* `GET /expenses`
+* `PUT /expense/{id}`
+* `DELETE /expense/{id}`
 
+---
 
- ##8. Testing
-  Frontend
-  App.test.js
-  Jest + React Testing Library
-  Backend
-  No tests detected
-  
-  9.
-  Dependencies
-  Backend
-  FastAPI → API framework
-  SQLAlchemy → ORM
-  Pydantic → validation
-  Frontend
-  React → UI framework
-  npm packages → dependency management
+## 🧪 Testing
 
-  10. Code Quality
-  Strengths
-  Clean separation (backend vs frontend)
-  Modular backend structure
-  Component-based frontend
-  Issues
-  Missing centralized API service (needs confirmation)
-  Limited AI implementation
-  No clear error handling strategy
+### Frontend
 
-  11. Security
-  Current
-  Password hashing
-  Missing / Risks
-  Token-based auth enforcement (JWT middleware)
-  CORS configuration
-  Input validation on frontend
+* Jest
+* React Testing Library
 
-  12. Performance
-  Bottlenecks
-  No caching
-  Synchronous DB calls
-  Improvements
-  Use async DB operations
-  Add pagination for expenses
-  Optimize frontend rendering
-  
-  13. Development Workflow
-  Current
-  Manual development (no CI/CD detected)
-  Recommended
-  GitHub Actions
-  Linting + testing pipelines
-  
-  14. Recommendations
-  
-  Backend
-  Implement JWT authentication fully
-  Expand AI service:
-  NLP-based categorization
-  Monthly predictions
-  
-  Frontend
-  Add state management (Context API / Redux)
-  Improve dashboard UI with charts
-  
-  System
-  Add logging
-  Add error handling middleware
-  Introduce role-based access (future)
+### Backend
 
+* No tests implemented yet
+
+---
+
+## 📦 Dependencies
+
+### Backend
+
+* FastAPI
+* SQLAlchemy
+* Pydantic
+
+### Frontend
+
+* React
+* npm packages
+
+---
+
+## 🔍 Code Quality
+
+### Strengths
+
+* Clear separation of frontend and backend
+* Modular backend structure
+* Component-based frontend
+
+### Areas to Improve
+
+* Centralized API service needs confirmation
+* AI module is incomplete
+* Limited error handling
+
+---
+
+## 🔐 Security
+
+### Current
+
+* Password hashing implemented
+
+### Missing / Improvements
+
+* JWT-based authentication middleware
+* Proper CORS configuration
+* Frontend validation
+
+---
+
+## ⚡ Performance
+
+### Current Limitations
+
+* No caching
+* Synchronous DB operations
+
+### Improvements
+
+* Use async database queries
+* Add pagination for large datasets
+* Optimize frontend rendering
+
+---
+
+## 🚀 Development Workflow
+
+### Current
+
+* Manual development
+
+### Recommended
+
+* GitHub Actions (CI/CD)
+* Linting and automated testing
+
+---
+
+## 📈 Future Enhancements
+
+### Backend
+
+* Complete JWT authentication
+* Advanced AI features:
+
+  * NLP-based categorization
+  * Monthly predictions
+
+### Frontend
+
+* State management (Context API / Redux)
+* Interactive charts and analytics
+
+### System
+
+* Logging system
+* Error handling middleware
+* Role-based access control
+
+---
+
+## 📄 License
+
+This project is for educational and development purposes.
