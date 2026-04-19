@@ -1,0 +1,21 @@
+from pydantic import BaseModel
+
+class ExpenseCreate(BaseModel):
+    amount: float
+    description: str
+    date: str
+
+class ExpenseResponse(BaseModel):
+    id: int
+    amount: float
+    description: str
+    category: str
+    date: str
+
+class ExpenseUpdate(BaseModel):
+    amount: float
+    description: str
+    date: str
+
+    class Config:
+        from_attributes = True
