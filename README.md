@@ -211,7 +211,7 @@ POST /register
 POST /login
 
 
-#### Expenses
+### Expenses
 
 POST /expense
 GET /expenses
@@ -219,20 +219,71 @@ PUT /expense/{id}
 DELETE /expense/{id}
 
 
----
+ ##8. Testing
+  Frontend
+  App.test.js
+  Jest + React Testing Library
+  Backend
+  No tests detected
+  
+  9.
+  Dependencies
+  Backend
+  FastAPI → API framework
+  SQLAlchemy → ORM
+  Pydantic → validation
+  Frontend
+  React → UI framework
+  npm packages → dependency management
 
-### Data Models
+  10. Code Quality
+  Strengths
+  Clean separation (backend vs frontend)
+  Modular backend structure
+  Component-based frontend
+  Issues
+  Missing centralized API service (needs confirmation)
+  Limited AI implementation
+  No clear error handling strategy
 
-#### User
-```python
-id: int
-name: str
-email: str
-password: str
-##Expense
-id: int
-amount: float
-category: str
-description: str
-date: datetime
-user_id: int
+  11. Security
+  Current
+  Password hashing
+  Missing / Risks
+  Token-based auth enforcement (JWT middleware)
+  CORS configuration
+  Input validation on frontend
+
+  12. Performance
+  Bottlenecks
+  No caching
+  Synchronous DB calls
+  Improvements
+  Use async DB operations
+  Add pagination for expenses
+  Optimize frontend rendering
+  
+  13. Development Workflow
+  Current
+  Manual development (no CI/CD detected)
+  Recommended
+  GitHub Actions
+  Linting + testing pipelines
+  
+  14. Recommendations
+  
+  Backend
+  Implement JWT authentication fully
+  Expand AI service:
+  NLP-based categorization
+  Monthly predictions
+  
+  Frontend
+  Add state management (Context API / Redux)
+  Improve dashboard UI with charts
+  
+  System
+  Add logging
+  Add error handling middleware
+  Introduce role-based access (future)
+
