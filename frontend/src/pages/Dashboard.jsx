@@ -94,8 +94,6 @@ function Dashboard() {
     return Math.round((getTotal() / expenses.length) * 30);
   };
 
-  const isOverspending = () => predictMonthly() > Number(budget);
-
   const getAnomalies = () => {
     if (expenses.length < 3) return [];
     const avg = getTotal() / expenses.length;
@@ -661,77 +659,236 @@ function Dashboard() {
             )}
 
             {/* INSIGHTS SECTION */}
-            {activeSection === "insights" && (
-              <>
-                <p>Set Your Monthly Budget:</p>
-                <input type="number" placeholder="Enter budget" value={budget}
-                  onChange={(e) => setBudget(Number(e.target.value))}
-                  style={{ width: "40%", padding: "10px", marginBottom: "10px", borderRadius: "8px", border: "1px solid #ccc" }} />
-                <h3>Total Spending: ₹{getTotal()}</h3>
-                <h3>Predicted Monthly Spending: ₹{predictMonthly()}</h3>
-                <h3>Monthly Budget: ₹{budget}</h3>
-                <h3>Remaining: ₹{budget - getTotal()}</h3>
-                {isOverspending() && (
-                  <p>{getTotal() > budget * 0.8 ? "⚠️ You have used 80% of your budget!" : "✅ You are managing your budget well."}</p>
-                )}
-              </>
-            )}
+ {activeSection === "insights" && (
+  <>
+
+    {/* BUDGET SETTER CARD */}
+    <div style={{
+      background: "#fff",
+      borderRadius: "16px",
+      padding: "24px",
+      marginBottom: "24px",
+      boxShadow: "0 2px 16px rgba(0,0,0,0.07)",
+      border: "1px solid rgba(0,0,0,0.06)"
+    }}>
+      <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
+        <div style={{
+          width: "32px", height: "32px", borderRadius: "8px",
+          background: "linear-gradient(135deg, #4f8ef7, #a855f7)",
+          display: "flex", alignItems: "center", justifyContent: "center", fontSize: "16px"
+        }}>🎯</div>
+        <h3 style={{ margin: 0, fontSize: "15px", fontWeight: "700", color: "#1a1a2e" }}>
+          Set Monthly Budget
+        </h3>
+      </div>
+
+      <div style={{ display: "flex", alignItems: "center", gap: "12px", flexWrap: "wrap" }}>
+        <div style={{ position: "relative", flex: "1", minWidth: "200px" }}>
+          <span style={{
+            position: "absolute", left: "14px", top: "50%", transform: "translateY(-50%)",
+            fontSize: "16px", fontWeight: "700", color: "#4f8ef7"
+          }}>₹</span>
+          <input
+            type="number"
+            placeholder="Enter your budget"
+            value={budget}
+            onChange={(e) => setBudget(Number(e.target.value))}
+            style={{
+              width: "100%", padding: "12px 14px 12px 32px",
+              borderRadius: "10px", border: "1.5px solid #e2e8f0",
+              fontSize: "15px", fontWeight: "600", outline: "none",
+              boxSizing: "border-box", background: "#fafafa",
+              color: "#1a1a2e"
+            }}
+            onFocus={(e) => e.target.style.borderColor = "#4f8ef7"}
+            onBlur={(e) => e.target.style.borderColor = "#e2e8f0"}
+          />
+        </div>
+        <div style={{
+          padding: "12px 20px", borderRadius: "10px",
+          background: "linear-gradient(90deg, #4f8ef7, #a855f7)",
+          color: "white", fontWeight: "700", fontSize: "14px",
+          whiteSpace: "nowrap"
+        }}>
+          Budget: ₹{Number(budget).toLocaleString()}
+        </div>
+      </div>
+    </div>
+
+    {/* STATS ROW */}
+    <div style={{
+      display: "grid",
+      gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
+      gap: "16px",
+      marginBottom: "24px"
+    }}>
+
+    </div>
+
+    {/* BUDGET PROGRESS CARD */}
+    <div style={{
+      background: "#fff", borderRadius: "16px", padding: "24px",
+      marginBottom: "24px",
+      boxShadow: "0 2px 16px rgba(0,0,0,0.07)",
+      border: "1px solid rgba(0,0,0,0.06)"
+    }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}>
+        <h3 style={{ margin: 0, fontSize: "15px", fontWeight: "700", color: "#1a1a2e" }}>
+          📊 Budget Usage
+        </h3>
+        <span style={{
+          fontSize: "13px", fontWeight: "700",
+          color: (getTotal() / budget) * 100 >= 100 ? "#ef4444"
+               : (getTotal() / budget) * 100 >= 80  ? "#f59e0b"
+               : "#10b981"
+        }}>
+          {Math.min(Math.round((getTotal() / budget) * 100), 100)}% used
+        </span>
+      </div>
+
+      {/* Progress Bar */}
+      <div style={{ height: "12px", background: "#f1f5f9", borderRadius: "8px", overflow: "hidden", marginBottom: "12px" }}>
+        <div style={{
+          height: "100%", borderRadius: "8px",
+          width: `${Math.min((getTotal() / budget) * 100, 100)}%`,
+          background: (getTotal() / budget) * 100 >= 100 ? "#ef4444"
+                    : (getTotal() / budget) * 100 >= 80  ? "linear-gradient(90deg, #f59e0b, #ef4444)"
+                    : "linear-gradient(90deg, #4f8ef7, #a855f7)",
+          transition: "width 0.6s ease"
+        }} />
+      </div>
+
+      {/* Progress Labels */}
+      <div style={{ display: "flex", justifyContent: "space-between", fontSize: "12px", color: "#94a3b8" }}>
+        <span>₹0</span>
+        <span>₹{Math.round(budget * 0.5).toLocaleString()} (50%)</span>
+        <span>₹{Number(budget).toLocaleString()} (100%)</span>
+      </div>
+
+      {/* Warning Messages */}
+      <div style={{ marginTop: "16px" }}>
+        {(getTotal() / budget) * 100 >= 100 && (
+          <div style={{
+            padding: "12px 16px", borderRadius: "10px",
+            background: "#fef2f2", border: "1px solid #fecaca",
+            color: "#991b1b", fontSize: "13px", fontWeight: "600",
+            display: "flex", alignItems: "center", gap: "8px"
+          }}>
+            🚨 You have exceeded your budget by ₹{(getTotal() - budget).toLocaleString()}!
+          </div>
+        )}
+        {(getTotal() / budget) * 100 >= 80 && (getTotal() / budget) * 100 < 100 && (
+          <div style={{
+            padding: "12px 16px", borderRadius: "10px",
+            background: "#fffbeb", border: "1px solid #fde68a",
+            color: "#92400e", fontSize: "13px", fontWeight: "600",
+            display: "flex", alignItems: "center", gap: "8px"
+          }}>
+            ⚠️ Warning! You have used 80% of your budget. Slow down your spending.
+          </div>
+        )}
+        {(getTotal() / budget) * 100 < 80 && (
+          <div style={{
+            padding: "12px 16px", borderRadius: "10px",
+            background: "#f0fdf4", border: "1px solid #bbf7d0",
+            color: "#166534", fontSize: "13px", fontWeight: "600",
+            display: "flex", alignItems: "center", gap: "8px"
+          }}>
+            ✅ Great job! You are managing your budget well.
+          </div>
+        )}
+      </div>
+    </div>
+
+    {/* SPENDING TIPS CARD */}
+    <div style={{
+      background: "linear-gradient(135deg, #0d1b4b, #2d0a6b)",
+      borderRadius: "16px", padding: "24px",
+      boxShadow: "0 2px 16px rgba(0,0,0,0.15)"
+    }}>
+      <h3 style={{ margin: "0 0 16px", fontSize: "15px", fontWeight: "700", color: "white" }}>
+        💬 Smart Spending Tips
+      </h3>
+      <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+        {[
+          { icon: "📌", tip: "Track every expense — small ones add up fast." },
+          { icon: "📅", tip: "Review your spending every week, not just month end." },
+          { icon: "🎯", tip: "Keep your daily spending under ₹" + Math.round(budget / 30).toLocaleString() + " to stay on track." },
+          { icon: "💡", tip: predictMonthly() > budget
+              ? `At this rate you'll overspend by ₹${(predictMonthly() - budget).toLocaleString()} this month.`
+              : `You're on track to save ₹${(budget - predictMonthly()).toLocaleString()} this month!` },
+        ].map(({ icon, tip }, i) => (
+          <div key={i} style={{
+            display: "flex", alignItems: "flex-start", gap: "10px",
+            padding: "10px 14px", borderRadius: "10px",
+            background: "rgba(255,255,255,0.07)",
+            border: "1px solid rgba(255,255,255,0.1)"
+          }}>
+            <span style={{ fontSize: "16px", flexShrink: 0 }}>{icon}</span>
+            <span style={{ fontSize: "13px", color: "rgba(255,255,255,0.85)", lineHeight: "1.5" }}>{tip}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </>)}
 
             {/* CHARTS SECTION */}
            {activeSection === "charts" && (
 
-  <div style={{
-  ...sectionStyle,
-  maxWidth: "800px",
-  margin: "0 auto"
-}}>
+ <div style={{ ...sectionStyle, maxWidth: "100%" }}>
 
     {/* PIE CHART */}
-    <div style={{ marginTop: "30px" }}>
-      <h3>Category Breakdown:</h3>
+    {/* CHARTS ROW */}
+ <div style={{ display: "flex", gap: "2px", flexWrap: "wrap" }}>
 
-      <div style={{ width: "100%", height: "350px" }}>
-        <ResponsiveContainer>
-          <PieChart>
-            <Pie
-              data={getCategoryData()}
-              dataKey="value"
-              nameKey="name"
-              outerRadius={130}
-              label
-            >
-              {getCategoryData().map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-              ))}
-            </Pie>
-            <Tooltip />
-            <Legend />
-          </PieChart>
-        </ResponsiveContainer>
-      </div>
+  {/* PIE CHART */}
+  <div style={{
+    flex: 1, minWidth: "20px",
+    background: "#fff", borderRadius: "16px", padding: "24px",
+    boxShadow: "0 2px 16px rgba(0,0,0,0.07)", border: "1px solid rgba(0,0,0,0.06)"
+  }}>
+    <h3 style={{ margin: "0 0 20px", fontSize: "15px", fontWeight: "700", color: "#1a1a2e" }}>
+      🥧 Category Breakdown
+    </h3>
+    <div style={{ width: "100%", height: "450px" }}>
+      <ResponsiveContainer>
+        <PieChart>
+          <Pie data={getCategoryData()} dataKey="value" nameKey="name" outerRadius={130} label>
+            {getCategoryData().map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+            ))}
+          </Pie>
+          <Tooltip />
+          <Legend />
+        </PieChart>
+      </ResponsiveContainer>
     </div>
-
-    {/* LINE CHART */}
-    <div style={{ marginTop: "30px" }}>
-      <h3>Category-wise Spending Trend:</h3>
-
-      <div style={{ width: "100%", height: "350px" }}>
-        <ResponsiveContainer>
-          <LineChart data={getCategoryLineData()}>
-            <CartesianGrid strokeDasharray="4 4" />
-            <XAxis dataKey="category" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Line type="monotone" dataKey="amount" stroke="#0a4137" />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-    </div>
-
   </div>
 
-)}
+  {/* LINE CHART */}
+  <div style={{
+    flex: 1, minWidth: "350px",
+    background: "#fff", borderRadius: "16px", padding: "24px",
+    boxShadow: "0 2px 16px rgba(0,0,0,0.07)", border: "1px solid rgba(0,0,0,0.06)"
+  }}>
+    <h3 style={{ margin: "0 0 20px", fontSize: "15px", fontWeight: "700", color: "#1a1a2e" }}>
+      📈 Spending Trend by Category
+    </h3>
+    <div style={{ width: "100%", height: "450px" }}>
+      <ResponsiveContainer>
+        <LineChart data={getCategoryLineData()}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="category" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Line type="monotone" dataKey="amount" stroke="#4f8ef7" strokeWidth={3} dot={{ fill: "#a855f7", r: 5 }} />
+        </LineChart>
+      </ResponsiveContainer>
+    </div>
+  </div>
+ </div></div>
+ )}
 
             {/* ANOMALIES SECTION */}
             {activeSection === "anomalies" && (
