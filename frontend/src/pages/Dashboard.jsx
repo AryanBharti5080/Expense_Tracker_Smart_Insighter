@@ -278,15 +278,6 @@ function Dashboard() {
         {/* MAIN CONTENT */}
         <div style={{ flex: 1, padding: "0px", background: "#eef2f7",}}>
 
-          {message && (
-            <div style={{
-              backgroundColor: "#0C67A0", padding: "10px", borderRadius: "5px",
-              marginBottom: "10px", color: "#d4edda"
-            }}>
-              {message}
-            </div>
-          )}
-
           <div style={{
   width: "100%",
   maxWidth: "1255px",
@@ -409,8 +400,20 @@ function Dashboard() {
             {/* DASHBOARD SECTION */}
             {activeSection === "dashboard" && (
               <>
-                <div style={sectionStyle}>
+                <div style={sectionStyle}>                
                   <h3>Add Expense</h3>
+                  {message && (
+                   <div style={{
+                       backgroundColor: "#e6f4ea",
+                      color: "#155724",
+                      padding: "10px",
+                      borderRadius: "6px",border: "1px solid #28a745",
+                         marginBottom: "15px",
+                      fontSize: "14px"
+                     }}>
+                  {message}
+                  </div>
+                 )}
                   <div style={{
                     display: "grid",
                     gridTemplateColumns: "1fr 1fr",

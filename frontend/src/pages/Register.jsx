@@ -95,9 +95,7 @@ function Register() {
             <h2 style={{ margin: 0, fontSize: "22px", fontWeight: "800", color: "#1a1a2e" }}>
              💰 Create Account
             </h2>
-            <p style={{ margin: "6px 0 0", fontSize: "13px", color: "#94a3b8" }}>
-              Sign up for your SpendWise account
-            </p>
+            
           </div>
 
           {/* NAME FIELD */}
