@@ -1,0 +1,108 @@
+/* ============================================================
+   STEP 5A — Create this file as: src/dashboard.css
+   Then import it in Dashboard.jsx with:
+   import "./dashboard.css";
+   ============================================================ */
+
+/* Design Tokens */
+:root {
+  --primary: #4f8ef7;
+  --primary-dark: #2563eb;
+  --accent: #a855f7;
+  --success: #10b981;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --bg-page: #f0f4fa;
+  --bg-card: #ffffff;
+  --text-main: #1a1a2e;
+  --text-muted: #64748b;
+  --border: #e2e8f0;
+  --radius: 14px;
+  --shadow: 0 2px 16px rgba(0,0,0,0.07);
+}
+
+/* Page background */
+body {
+  background: var(--bg-page);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #f1f5f9; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+
+/* Main content area */
+.main-content {
+  flex: 1;
+  padding: 28px;
+  background: var(--bg-page);
+  min-height: 100vh;
+  overflow-y: auto;
+}
+
+/* Page title */
+.page-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text-main);
+  margin: 0 0 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Toast notification */
+@keyframes slideIn {
+  from { transform: translateX(110%); opacity: 0; }
+  to   { transform: translateX(0);   opacity: 1; }
+}
+@keyframes slideOut {
+  from { transform: translateX(0);   opacity: 1; }
+  to   { transform: translateX(110%); opacity: 0; }
+}
+
+.toast {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  background: #1a1a2e;
+  color: white;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  animation: slideIn 0.35s cubic-bezier(.22,.68,0,1.2) forwards;
+  min-width: 260px;
+  max-width: 360px;
+}
+
+.toast.exit {
+  animation: slideOut 0.25s ease forwards;
+}
+
+.toast-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+/* Input focus ring */
+input:focus, select:focus {
+  outline: none;
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 0 3px rgba(79,142,247,0.15);
+}
+
+/* Section heading */
+.section-heading {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin: 0 0 16px;
+}
