@@ -339,12 +339,7 @@ Response → Frontend Rendering
 
 ---
 
-## 📄 License
-
-This project is for educational and development purposes.
-
-
-#🔗 Project Overview & Demonstration**
+## 🔗 Project Overview & Demonstration
 
 The link below provides a comprehensive view of the project, including its end-to-end workflow, core features, and API architecture.
 It demonstrates how the system operates in real time, from user interaction to backend processing.
@@ -355,4 +350,4 @@ What you can explore:
 ⚙️ Key Features – Functional highlights and capabilities
 🔌 API Flow – How frontend and backend communicate
 
-👉 ## https://drive.google.com/file/d/1hBp0ALEPp3m7yUdM8J7dbMz6ixFavOTy/view?usp=sharing 
+👉  https://drive.google.com/file/d/1hBp0ALEPp3m7yUdM8J7dbMz6ixFavOTy/view?usp=sharing 
